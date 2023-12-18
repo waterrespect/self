@@ -1,19 +1,8 @@
 <template>
   <div class="upload-file">
-    <el-upload
-      multiple
-      :action="uploadFileUrl"
-      :before-upload="handleBeforeUpload"
-      :file-list="fileList"
-      :limit="limit"
-      :on-error="handleUploadError"
-      :on-exceed="handleExceed"
-      :on-success="handleUploadSuccess"
-      :show-file-list="false"
-      :headers="headers"
-      class="upload-file-uploader"
-      ref="fileUpload"
-    >
+    <el-upload multiple :action="uploadFileUrl" :before-upload="handleBeforeUpload" :file-list="fileList" :limit="limit"
+      :on-error="handleUploadError" :on-exceed="handleExceed" :on-success="handleUploadSuccess" :show-file-list="false"
+      :headers="headers" class="upload-file-uploader" ref="fileUpload">
       <!-- 上传按钮 -->
       <el-button size="mini" type="primary">选取文件</el-button>
       <!-- 上传提示 -->
@@ -55,7 +44,7 @@ export default {
     // 大小限制(MB)
     fileSize: {
       type: Number,
-      default: 5,
+      default: 500,
     },
     // 文件类型, 例如['png', 'jpg', 'jpeg']
     fileType: {
@@ -114,6 +103,7 @@ export default {
     // 上传前校检格式和大小
     handleBeforeUpload(file) {
       // 校检文件类型
+      /**
       if (this.fileType) {
         const fileName = file.name.split('.');
         const fileExt = fileName[fileName.length - 1];
@@ -122,7 +112,7 @@ export default {
           this.$modal.msgError(`文件格式不正确, 请上传${this.fileType.join("/")}格式文件!`);
           return false;
         }
-      }
+      } */
       // 校检文件大小
       if (this.fileSize) {
         const isLt = file.size / 1024 / 1024 < this.fileSize;
@@ -197,18 +187,21 @@ export default {
 .upload-file-uploader {
   margin-bottom: 5px;
 }
+
 .upload-file-list .el-upload-list__item {
   border: 1px solid #e4e7ed;
   line-height: 2;
   margin-bottom: 10px;
   position: relative;
 }
+
 .upload-file-list .ele-upload-list__item-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: inherit;
 }
+
 .ele-upload-list__item-content-action .el-link {
   margin-right: 10px;
 }
